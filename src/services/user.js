@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import { UsersCollection } from './../db/models/User.js';
 export const changeWaterRateService = async (id, dailyNorma, options = {}) => {
   let rawResult = null;
-  const contact = await UsersCollection.findOne({ _id: id });
-  if (contact) {
+  const user = await UsersCollection.findOne({ _id: id });
+  if (user) {
     rawResult = await UsersCollection.findOneAndUpdate(
       { _id: id },
       { $set: { dailyNorma } },
