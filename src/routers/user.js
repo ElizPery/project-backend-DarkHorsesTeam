@@ -5,7 +5,7 @@ import validateBody from './../utils/validateBody.js';
 import { waterRateSchema } from '../validation/users.js';
 
 const userRouter = Router();
-
+userRouter.get('/:userId');
 userRouter.patch(
   '/change-water-rate/:userId',
   validateBody(waterRateSchema),

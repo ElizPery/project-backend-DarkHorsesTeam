@@ -1,6 +1,10 @@
 import createHttpError from 'http-errors';
 import { changeWaterRateService } from '../services/user.js';
 
+export const getUserDataController = async (req, res, next) => {
+  const { userId } = req.params;
+};
+
 export const changeWaterRateController = async (req, res, next) => {
   const { userId } = req.params;
   const result = await changeWaterRateService(userId, req.body.dailyNorma);

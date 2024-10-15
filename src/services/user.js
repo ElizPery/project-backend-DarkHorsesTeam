@@ -1,5 +1,9 @@
-import mongoose from 'mongoose';
 import { UsersCollection } from './../db/models/User.js';
+
+export const getUserData = async (id) => {
+  const 
+}
+
 export const changeWaterRateService = async (id, dailyNorma, options = {}) => {
   let rawResult = null;
   const contact = await UsersCollection.findOne({ _id: id });
