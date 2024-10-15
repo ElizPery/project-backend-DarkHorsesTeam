@@ -1,13 +1,11 @@
 import { UsersCollection } from './../db/models/User.js';
 
-export const getUserData = async (id) => {
-  const 
-}
+export const getUserDataService = async (id) => UsersCollection.findOne(id);
 
 export const changeWaterRateService = async (id, dailyNorma, options = {}) => {
   let rawResult = null;
-  const contact = await UsersCollection.findOne({ _id: id });
-  if (contact) {
+  const user = await UsersCollection.findOne(id);
+  if (user) {
     rawResult = await UsersCollection.findOneAndUpdate(
       { _id: id },
       { $set: { dailyNorma } },
