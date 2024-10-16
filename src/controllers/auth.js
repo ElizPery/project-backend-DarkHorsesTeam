@@ -7,3 +7,15 @@ export const registerController = async (req, res) => {
     data: newUser,
   });
 };
+
+export const logoutController = async(req, res)=> {
+  const {sessionId} = req.cookies;
+  if(sessionId) {
+      await authServices.logout(sessionId);
+  }
+
+  res.clearCookie("sessionId");
+  res.clearCookie("refreshToken");
+
+  res.status(204).send();
+};
