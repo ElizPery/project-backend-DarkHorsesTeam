@@ -7,6 +7,7 @@ import {
 import validateBody from './../utils/validateBody.js';
 import { waterRateSchema } from '../validation/users.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import upload from '../middlewares/upload.js';
 
 const userRouter = Router();
 userRouter.use(authenticate);
@@ -15,5 +16,10 @@ userRouter.patch(
   '/change-water-rate',
   validateBody(waterRateSchema),
   ctrlWrapper(changeWaterRateController),
+);
+userRouter.patch(
+  '/change-photo',
+  upload.single('avatar'),
+  ctrlWrapper(updateUserAvatarController),
 );
 export default userRouter;

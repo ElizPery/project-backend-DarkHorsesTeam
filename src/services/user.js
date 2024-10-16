@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 import { UsersCollection } from './../db/models/User.js';
 export const getUserDataService = async (id) =>
@@ -17,4 +16,12 @@ export const changeWaterRateService = async (id, dailyNorma, options = {}) => {
   return {
     dailyNorma: rawResult.value.dailyNorma,
   };
+};
+
+export const updateUserAvatarService = async (userId, avatarUrl) => {
+  return await UsersCollection.findByIdAndUpdate(
+    userId,
+    { photo: avatarUrl },
+    { new: true },
+  );
 };
