@@ -8,7 +8,6 @@ export const changeWaterRateService = async (id, dailyNorma, options = {}) => {
   const user = await UsersCollection.findOne(id);
   if (user) {
     rawResult = await UsersCollection.findOneAndUpdate(id, dailyNorma, {
-      new: true,
       includeResultMetadata: true,
       ...options,
     });
