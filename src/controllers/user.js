@@ -4,6 +4,7 @@ import {
   getUserDataService,
 } from '../services/user.js';
 
+
 export const getUserDataController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const data = await getUserDataService({ _id: userId });

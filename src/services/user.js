@@ -1,5 +1,6 @@
-import { UsersCollection } from './../db/models/User.js';
 
+import mongoose from 'mongoose';
+import { UsersCollection } from './../db/models/User.js';
 export const getUserDataService = async (id) =>
   UsersCollection.findOne(id).select('-password');
 
