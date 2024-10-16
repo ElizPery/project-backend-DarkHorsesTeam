@@ -4,6 +4,7 @@ import ctrlWrapper from '../utils/ctrlWrapper.js';
 import validateBody from '../utils/validateBody.js';
 import { userRegisterSchema } from '../validation/users.js';
 
+
 const authRouter = Router();
 authRouter.post(
   '/register',
