@@ -6,6 +6,19 @@ import createHttpError from 'http-errors';
 import { randomBytes } from "crypto";
 import { accessTokenLifeTime, refreshTokenLifeTime } from '../constants/users.js';
 
+const createSession = () => {
+  const accessToken = randomBytes(30).toString("base64");
+  const refreshToken = randomBytes(30).toString("base64");
+  const accessTokenValidUntil = new Date(Date.now() + accessTokenLifeTime);
+  const refreshTokenValidUntil = new Date(Date.now() + refreshTokenLifeTime);
+  return {
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil,
+    refreshTokenValidUntil,
+  };
+};
+
 export const register = async (payload) => {
   const { email, password } = payload;
   const user = await UsersCollection.findOne({ email });
@@ -38,18 +51,7 @@ export const logoutUser = async (sessionId) => {
   await SessionCollection.deleteOne({ _id: sessionId });
 };
 
-const createSession = () => {
-  const accessToken = randomBytes(30).toString("base64");
-  const refreshToken = randomBytes(30).toString("base64");
-  const accessTokenValidUntil = new Date(Date.now() + accessTokenLifeTime);
-  const refreshTokenValidUntil = new Date(Date.now() + refreshTokenLifeTime);
-  return {
-    accessToken,
-    refreshToken,
-    accessTokenValidUntil,
-    refreshTokenValidUntil,
-  };
-};
+
 
 export const login = async (payload) => {
   const { email, password } = payload;

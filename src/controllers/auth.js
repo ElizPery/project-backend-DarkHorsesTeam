@@ -1,4 +1,16 @@
 import * as authServices from '../services/auth.js';
+
+const setupSession = (res, session) => {
+  res.cookie("refreshToken", session.refreshToken, {
+    httpOnly: true,
+    expire: new Date(Date.now() + session.refreshTokenValidUntil),
+  });
+  res.cookie("sessionId", session._id, {
+      httpOnly: true,
+      expire: new Date(Date.now() + session.refreshTokenValidUntil),
+  });
+};
+
 export const registerController = async (req, res) => {
   const newUser = await authServices.register(req.body);
   res.status(201).json({
@@ -19,16 +31,7 @@ export const logoutController = async(req, res)=> {
 
   res.status(204).send();
 };
-const setupSession = (res, session) => {
-  res.cookie("refreshToken", session.refreshToken, {
-    httpOnly: true,
-    expire: new Date(Date.now() + session.refreshTokenValidUntil),
-  });
-  res.cookie("sessionId", session._id, {
-      httpOnly: true,
-      expire: new Date(Date.now() + session.refreshTokenValidUntil),
-  });
-};
+
 export const loginController = async (req, res) => {
   const session = await authServices.login(req.body);
   setupSession(res, session);
