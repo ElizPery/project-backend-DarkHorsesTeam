@@ -5,7 +5,7 @@ import {
 } from '../services/user.js';
 
 export const getUserDataController = async (req, res, next) => {
-  const { userId } = req.params;
+  const { _id: userId } = req.user;
   const data = await getUserDataService({ _id: userId });
   if (!data) {
     next(createHttpError(404, `User with id=${userId} not found`));
@@ -19,10 +19,11 @@ export const getUserDataController = async (req, res, next) => {
 };
 
 export const changeWaterRateController = async (req, res, next) => {
-  const { userId } = req.params;
+  const { _id: userId } = req.user;
+  const { dailyNorma } = req.body;
   const result = await changeWaterRateService(
     { _id: userId },
-    req.body.dailyNorma,
+    { $set: { dailyNorma } },
   );
   if (!result) {
     next(createHttpError(404, `User with id=${userId} not found`));

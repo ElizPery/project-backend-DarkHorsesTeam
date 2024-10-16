@@ -8,9 +8,9 @@ import validateBody from './../utils/validateBody.js';
 import { waterRateSchema } from '../validation/users.js';
 
 const userRouter = Router();
-userRouter.get('/:userId', ctrlWrapper(getUserDataController));
+userRouter.get('/', ctrlWrapper(getUserDataController));
 userRouter.patch(
-  '/change-water-rate/:userId',
+  '/change-water-rate',
   validateBody(waterRateSchema),
   ctrlWrapper(changeWaterRateController),
 );
