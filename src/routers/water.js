@@ -16,4 +16,9 @@ waterRouter.post(
   ctrlWrapper(WaterControllers.addWaterController),
 );
 
+waterRouter.delete(
+  '/:id',
+  isValidId,
+  ctrlWrapper(WaterControllers.deleteWaterController),
+);
 export default waterRouter;
