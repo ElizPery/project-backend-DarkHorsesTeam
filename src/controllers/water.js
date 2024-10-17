@@ -2,7 +2,7 @@ import { getWaterForMonth } from "../services/water.js";
 
 
 export async function getWaterForMonthController(req , res) {
-  const {month} = req.query;
+  const {month} = req.body;
   const userId = await req.user._id;
   const year = new Date().getFullYear();
 
