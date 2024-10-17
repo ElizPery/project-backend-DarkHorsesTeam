@@ -7,6 +7,7 @@ import isValidId from '../middlewares/isValidId.js';
 import {
   addWaterController,
   getWaterForMonthController,
+  deleteWaterController,
 } from '../controllers/water.js';
 const waterRouter = Router();
 
@@ -24,9 +25,5 @@ waterRouter.post(
   ctrlWrapper(getWaterForMonthController),
 );
 
-waterRouter.delete(
-  '/:id',
-  isValidId,
-  ctrlWrapper(WaterControllers.deleteWaterController),
-);
+waterRouter.delete('/:id', ctrlWrapper(deleteWaterController));
 export default waterRouter;

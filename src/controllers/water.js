@@ -1,4 +1,5 @@
-import { addWater, getWaterForMonth } from '../services/water.js';
+import { addWater, getWaterForMonth, deleteWater } from '../services/water.js';
+import createHttpError from 'http-errors';
 
 export const addWaterController = async (req, res) => {
   const { _id: userId } = req.user;
@@ -28,10 +29,14 @@ export async function getWaterForMonthController(req, res) {
 
 export const deleteWaterController = async (req, res) => {
   const { id } = req.params;
-  const { _id: userId } = req.user;
-  const data = await waterServices.deleteWater({ _id: id, userId });
-
+  const { _id: _userId } = req.user;
+  const data = await deleteWater({
+    _id: id,
+    userId: _userId,
+  });
+  console.log('d', data);
   if (!data) {
+    console.log('d1', data);
     throw createHttpError(404, 'Water not found');
   }
 

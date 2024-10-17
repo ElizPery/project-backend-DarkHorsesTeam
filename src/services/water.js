@@ -56,6 +56,5 @@ export async function getWaterForMonth({ year, userId, month }) {
 }
 
 export const deleteWater = async (filter) => {
-  console.log(filter);
-  await WaterCollection.findOneAndDelete(filter);
+  return await WaterCollection.findOneAndDelete(filter);
 };
