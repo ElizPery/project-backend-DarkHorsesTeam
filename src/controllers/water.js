@@ -1,12 +1,13 @@
 import { getTodayWater } from "../services/water.js";
 
 export const getTodayWaterController = async (req, res) => {
-    const { _id: userId } = req.user;
+    const userId = req.user._id;
+    const dailyNorma = req.user.dailyNorma;
     
-    const data = await getTodayWater({userId});
+    const data = await getTodayWater({userId, dailyNorma});
      res.json({
             status: 200,
-            message: "Successfully found water data",
-            data: data,
+            message: "Successfully found today's water data",
+            data,
         });
 };

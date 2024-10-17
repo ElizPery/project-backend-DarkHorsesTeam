@@ -1,32 +1,40 @@
 import {WaterCollection} from '../db/models/Water.js';
 
-export const getTodayWater = async ({ userId }) => {
+const addZero = (value) => {
+    const string = value.toString();
+    if (string.length < 2) {
+        return `0${value}`;
+    }
+    return value;
+};
 
-    // const todayYear = new Date().getFullYear();
-    // const todayDay = new Date().getDate();
-    // const todayMonth = new Date().getMonth();
-    // const date = `${todayYear}-${todayMonth + 1}-${todayDay}`;
+export const getTodayWater = async ({ userId, dailyNorma }) => {
+
+    const year = new Date().getFullYear();
+    const month = addZero(new Date().getMonth() + 1);
+    const day = addZero(new Date().getDate());
+       
+    const waterQuery = await WaterCollection.find({
+        "userId": userId,
+        date: { $gte: `${year}-${month}-${day}T00:00:00` }
+    });
+
+    if (waterQuery.length === 0) {
+        return {
+            data: [],
+            totalWaterPercent: "0%"
+        };
+    };
     
-    const waterQuery = WaterCollection.find();
-    const data = waterQuery.where('userId').equals(userId);
+    let waterForDay;
+    waterQuery.forEach((element) => {
+        waterForDay += element.volume;
+    });
 
+    const percent = Math.ceil((waterForDay / dailyNorma) * 100);
     
-
-
-
-
-
-
-
-
-
-
-
-
-    // const dataDate = "2024-10-17T20:21";
-    // const dataDateSlice = dataDate.slice(0, 10);
-    // console.log(dataDateSlice);
-
-    // console.log(dataDateSlice === date);
-    return data;
+    return {
+        data: waterQuery,
+        totalWaterPercent:`${percent}%`
+    };
 };
