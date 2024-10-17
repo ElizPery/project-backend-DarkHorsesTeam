@@ -21,6 +21,7 @@ const waterRouter = Router();
 waterRouter.use(authenticate);
 
 
+
 waterRouter.get('/today', ctrlWrapper(getTodayWaterController));
 
 waterRouter.patch(
