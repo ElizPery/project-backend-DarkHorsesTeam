@@ -1,6 +1,22 @@
-import createHttpError from 'http-errors';
-import { updateWaterService } from '../services/water.js';
+
+import { getTodayWater } from "../services/water.js";
 import { addWater, getWaterForMonth } from '../services/water.js';
+import { updateWaterService } from '../services/water.js';
+import createHttpError from 'http-errors';
+
+export const getTodayWaterController = async (req, res) => {
+    const userId = req.user._id;
+    const dailyNorma = req.user.dailyNorma;
+    
+    const data = await getTodayWater({userId, dailyNorma});
+     res.json({
+            status: 200,
+            message: "Successfully found today's water data",
+            data,
+        });
+};
+
+
 
 export const updateWaterController = async (req, res) => {
   const { id } = req.params;
@@ -43,3 +59,4 @@ export async function getWaterForMonthController(req, res) {
     data,
   });
 }
+
