@@ -4,9 +4,10 @@ import { addWater, getWaterForMonth } from '../services/water.js';
 
 export const updateWaterController = async (req, res) => {
   const { id } = req.params;
+  const { _id: userId } = req.user;
   const { volume, date } = req.body;
 
-  const data = await updateWaterService(id, { volume, date });
+  const data = await updateWaterService({ _id: id, userId }, { volume, date });
 
   if (!data) {
     throw createHttpError(404, 'Water record not found');

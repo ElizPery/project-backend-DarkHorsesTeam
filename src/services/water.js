@@ -1,8 +1,11 @@
 import { WaterCollection } from '../models/water.js';
 import createHttpError from 'http-errors';
 
-export const updateWaterService = async (id, data) => {
-  const rawResult = await WaterCollection.findOneAndUpdate({ _id: id }, data);
+export const updateWaterService = async (filter, data, options = {}) => {
+  const rawResult = await WaterCollection.findOneAndUpdate(filter, data, {
+    includeResultMetadata: true,
+    ...options,
+  });
 
   if (!rawResult || !rawResult.value) return null;
 
