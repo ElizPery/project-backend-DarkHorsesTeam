@@ -1,5 +1,10 @@
 import Joi from 'joi';
 
+export const updateWaterSchema = Joi.object({
+  volume: Joi.number().required(),
+  date: Joi.string().required(),
+});
+
 export const waterPostShema = Joi.object({
   date: Joi.string().required(),
   volume: Joi.number().min(1).max(5000).required(),

@@ -1,6 +1,8 @@
 
 import { getTodayWater } from "../services/water.js";
 import { addWater, getWaterForMonth } from '../services/water.js';
+import { updateWaterService } from '../services/water.js';
+import createHttpError from 'http-errors';
 
 export const getTodayWaterController = async (req, res) => {
     const userId = req.user._id;
@@ -14,6 +16,24 @@ export const getTodayWaterController = async (req, res) => {
         });
 };
 
+
+
+export const updateWaterController = async (req, res) => {
+  const { id } = req.params;
+  const { volume, date } = req.body;
+
+  const data = await updateWaterService(id, { volume, date });
+
+  if (!data) {
+    throw createHttpError(404, 'Water record not found');
+  }
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully update water record',
+    data,
+  });
+};
 
 export const addWaterController = async (req, res) => {
   const { _id: userId } = req.user;
