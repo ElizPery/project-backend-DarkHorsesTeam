@@ -15,7 +15,7 @@ export const getTodayWater = async ({ userId, dailyNorma }) => {
     const day = addZero(new Date().getDate());
        
     const waterQuery = await WaterCollection.find({
-        "userId": userId,
+        userId: userId,
         date: { $gte: `${year}-${month}-${day}T00:00:00` }
     });
 
