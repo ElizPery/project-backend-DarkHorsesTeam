@@ -2,8 +2,10 @@ import createHttpError from 'http-errors';
 import {
   changeWaterRateService,
   getUserDataService,
-  updateUserAvatarController,
+  updateUserAvatarService,
 } from '../services/user.js';
+import { saveFileToCloudinary } from '../utils/cloudinary.js';
+import { saveFileToUploadsDir } from '../utils/fileUpload.js';
 
 export const getUserDataController = async (req, res, next) => {
   const { _id: userId } = req.user;
@@ -38,32 +40,32 @@ export const changeWaterRateController = async (req, res, next) => {
 };
 
 export const updateUserAvatarController = async (req, res, next) => {
-  try {
-    const userId = req.user._id;
-    let avatarUrl = req.user.photo || null;
+  const userId = req.user._id;
+  let avatarUrl = req.user.photo || null;
 
-    if (req.file) {
-      if (avatarUrl) {
-        const publicId = avatarUrl.split('/').pop().split('.')[0];
-        await cloudinary.uploader.destroy(publicId);
-      }
-
-      const result = await cloudinary.uploader.upload(req.file.path);
-      avatarUrl = result.secure_url;
+  if (req.file) {
+    if (avatarUrl) {
+      const publicId = avatarUrl.split('/').pop().split('.')[0];
+      await cloudinary.uploader.destroy(publicId);
     }
 
-    const updatedUser = await updateUserAvatarService(userId, avatarUrl);
-
-    if (!updatedUser) {
-      next(createHttpError(404, `User with id=${userId} not found`));
-      return;
+    if (env('ENABLE_CLOUDINARY') === 'true') {
+      // Cloudinary
+      avatarUrl = await saveFileToCloudinary(req.file);
+    } else {
+      //  локально
+      avatarUrl = await saveFileToUploadsDir(req.file);
     }
-
-    res.status(200).json({
-      status: 'success',
-      data: updatedUser,
-    });
-  } catch (error) {
-    next(error);
   }
+
+  const updatedUser = await updateUserAvatarService(userId, avatarUrl);
+
+  if (!updatedUser) {
+    return next(createHttpError(404, `User with id=${userId} not found`));
+  }
+
+  res.status(200).json({
+    status: 200,
+    data: updatedUser,
+  });
 };

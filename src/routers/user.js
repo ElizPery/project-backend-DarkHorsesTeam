@@ -19,7 +19,7 @@ userRouter.patch(
 );
 userRouter.patch(
   '/change-photo',
-  upload.single('avatar'),
+  upload.single('photo'),
   ctrlWrapper(updateUserAvatarController),
 );
 export default userRouter;

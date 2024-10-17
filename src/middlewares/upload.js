@@ -1,4 +1,7 @@
-const multer = require('multer');
+import multer from 'multer';
+import path from 'node:path';
+
+const TEMP_UPLOAD_DIR = './temp';
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ['image/jpeg', 'image/png'];
@@ -13,11 +16,17 @@ const fileFilter = (req, file, cb) => {
   cb(null, true);
 };
 
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: TEMP_UPLOAD_DIR,
+  filename: (req, file, callback) => {
+    const uniquePreffix = Date.now();
+    callback(null, `${uniquePreffix}_${file.originalname}`);
+  },
+});
 
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
 });
 
-module.exports = upload;
+export default upload;
