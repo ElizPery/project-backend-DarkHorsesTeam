@@ -1,5 +1,13 @@
+import { WaterCollection } from '../models/water.js';
 import createHttpError from 'http-errors';
-import { WaterCollection } from '../db/models/Water.js';
+
+export const updateWaterService = async (id, data) => {
+  const rawResult = await WaterCollection.findOneAndUpdate({ _id: id }, data);
+
+  if (!rawResult || !rawResult.value) return null;
+
+  return rawResult.value;
+};
 
 export const addWater = async (userId, date, volume, dailyNorma) => {
   const waterload = {
