@@ -18,3 +18,10 @@ export const userLoginSchema = Joi.object({
     email: Joi.string().pattern(emailRegexp).required(),
     password: Joi.string().min(8).max(64).required(),
 });
+
+export const userUpdateSchema = Joi.object({
+  name: Joi.string().min(3).max(20),
+  email: Joi.string(),
+  dailyNorma: Joi.number().min(0).max(10000),
+  gender: Joi.string().valid('man', 'woman'),
+});
