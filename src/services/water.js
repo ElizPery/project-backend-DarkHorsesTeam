@@ -1,23 +1,32 @@
-import createHttpError from "http-errors";
-import { WaterCollection } from "../db/models/Water.js";
+import createHttpError from 'http-errors';
+import { WaterCollection } from '../db/models/Water.js';
 
+export const addWater = async (userId, date, volume, dailyNorma) => {
+  const waterload = {
+    userId,
+    date,
+    volume,
+    dailyNorma,
+  };
+  return await WaterCollection.create(waterload);
+};
 
-export async function getWaterForMonth({year , userId , month}) {
-  if(!month){
-    throw createHttpError(400 , "Month is required");
+export async function getWaterForMonth({ year, userId, month }) {
+  if (!month) {
+    throw createHttpError(400, 'Month is required');
   }
 
   const waterRecords = await WaterCollection.find({
     userId: userId,
     date: {
       $gte: `${year}-${month}-01T00:00:00`,
-      $lte: `${year}-${month}-31T23:59:00`
-    }
+      $lte: `${year}-${month}-31T23:59:00`,
+    },
   });
   const dailyRecords = {};
 
   waterRecords.forEach((record) => {
-    const date = record.date.split("T")[0];
+    const date = record.date.split('T')[0];
 
     if (!dailyRecords[date]) {
       dailyRecords[date] = {
@@ -33,15 +42,15 @@ export async function getWaterForMonth({year , userId , month}) {
 
   const result = Object.keys(dailyRecords).map((date) => {
     const record = dailyRecords[date];
-    const percentage = ((record.totalVolume / record.dailyNorma) * 100);
+    const percentage = (record.totalVolume / record.dailyNorma) * 100;
 
     return {
       date: date,
       dailyNorma: record.dailyNorma,
       consumptionCount: record.consumptionCount,
-      percentage: `${percentage}%`
+      percentage: `${percentage}%`,
     };
   });
 
   return result;
-};
+}
