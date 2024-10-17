@@ -1,4 +1,4 @@
-import { addWater } from '../services/water.js';
+import { addWater, getWaterForMonth } from '../services/water.js';
 
 export const addWaterController = async (req, res) => {
   const { _id: userId } = req.user;
@@ -11,3 +11,16 @@ export const addWaterController = async (req, res) => {
     data,
   });
 };
+export async function getWaterForMonthController(req, res) {
+  const { month } = req.body;
+  const userId = req.user._id;
+  const year = new Date().getFullYear();
+
+  const data = await getWaterForMonth({ month, userId, year });
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully',
+    data,
+  });
+}
