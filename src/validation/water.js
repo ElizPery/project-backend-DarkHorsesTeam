@@ -1,9 +1,7 @@
 import Joi from 'joi';
 
 export const waterPostShema = Joi.object({
-  date: Joi.date()
-    .required()
-    .max('now')
-    .min(new Date().setUTCHours(0, 0, 0, 0)),
+  date: Joi.string().required(),
   volume: Joi.number().min(1).max(5000).required(),
+  dailyNorma: Joi.number().required(),
 });
