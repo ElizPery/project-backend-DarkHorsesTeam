@@ -43,3 +43,29 @@ export const loginController = async (req, res) => {
     },
   });
 };
+export const refreshController = async (req, res, next) => {
+  try {
+    const session = req.session;
+
+    const newSessionData = authServices.createSession();
+
+    session.accessToken = newSessionData.accessToken;
+    session.accessTokenValidUntil = newSessionData.accessTokenValidUntil;
+    session.refreshToken = newSessionData.refreshToken;
+    session.refreshTokenValidUntil = newSessionData.refreshTokenValidUntil;
+
+    await session.save();
+
+    setupSession(res, session);
+
+    res.json({
+      status: 200,
+      message: 'Successfully refreshed the session!',
+      data: {
+        accessToken: newSessionData.accessToken,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -40,7 +40,9 @@ export const register = async (payload) => {
 export const findSessionByAccessToken = async (accessToken) => {
   return await SessionCollection.findOne({ accessToken });
 };
-
+export const findSessionByRefreshToken = async (refreshToken) => {
+  return await SessionCollection.findOne({ refreshToken });
+};
 
 export const findUser = async (filter) => {
   return await UsersCollection.findOne(filter);
