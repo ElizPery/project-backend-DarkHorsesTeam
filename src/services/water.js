@@ -1,4 +1,4 @@
-import { WaterCollection } from '../models/water.js';
+import { WaterCollection } from '../db/models/Water.js';
 import createHttpError from 'http-errors';
 
 export const updateWaterService = async (id, data) => {

@@ -35,6 +35,6 @@ waterRouter.post(
   ctrlWrapper(getWaterForMonthController),
 );
 
-waterRouter.delete('/:id', ctrlWrapper(deleteWaterController));
+waterRouter.delete('/:id', isValidId, ctrlWrapper(deleteWaterController));
 
 export default waterRouter;

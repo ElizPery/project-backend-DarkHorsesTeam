@@ -47,10 +47,10 @@ export async function getWaterForMonthController(req, res) {
 
 export const deleteWaterController = async (req, res) => {
   const { id } = req.params;
-  const { _id: _userId } = req.user;
+  const { _id: userId } = req.user;
   const data = await deleteWater({
     _id: id,
-    userId: _userId,
+    userId: userId,
   });
 
   if (!data) {
