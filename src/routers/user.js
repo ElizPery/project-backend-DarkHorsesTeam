@@ -5,7 +5,7 @@ import {
   getUserDataController,
 } from '../controllers/user.js';
 import validateBody from './../utils/validateBody.js';
-import { waterRateSchema } from '../validation/users.js';
+import { waterRateSchema, updatePhotoUserSchema } from '../validation/users.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import upload from '../middlewares/upload.js';
 
@@ -20,6 +20,7 @@ userRouter.patch(
 userRouter.patch(
   '/change-photo',
   upload.single('photo'),
+  validateBody(updatePhotoUserSchema),
   ctrlWrapper(updateUserAvatarController),
 );
 export default userRouter;

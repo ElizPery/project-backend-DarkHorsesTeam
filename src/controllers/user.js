@@ -41,7 +41,7 @@ export const changeWaterRateController = async (req, res, next) => {
 
 export const updateUserAvatarController = async (req, res, next) => {
   const userId = req.user._id;
-  let avatarUrl = req.user.photo || null;
+  let avatarUrl = req.user.photo;
 
   if (req.file) {
     if (avatarUrl) {
@@ -50,10 +50,8 @@ export const updateUserAvatarController = async (req, res, next) => {
     }
 
     if (env('ENABLE_CLOUDINARY') === 'true') {
-      // Cloudinary
       avatarUrl = await saveFileToCloudinary(req.file);
     } else {
-      //  локально
       avatarUrl = await saveFileToUploadsDir(req.file);
     }
   }
