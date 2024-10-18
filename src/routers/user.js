@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import ctrlWrapper from './../utils/ctrlWrapper.js';
 import {
+  changeUserController,
   changeWaterRateController,
   getUserDataController,
 } from '../controllers/user.js';
 import validateBody from './../utils/validateBody.js';
-import { waterRateSchema } from '../validation/users.js';
+import { userUpdateSchema, waterRateSchema } from '../validation/users.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import isValidId from '../middlewares/isValidId.js';
 
 const userRouter = Router();
 userRouter.use(authenticate);
@@ -16,4 +18,13 @@ userRouter.patch(
   validateBody(waterRateSchema),
   ctrlWrapper(changeWaterRateController),
 );
+
+userRouter.patch(
+  '/update-info/:userId',
+  // upload.single('photo'),
+  validateBody(userUpdateSchema),
+  ctrlWrapper(changeUserController),
+);
+
+
 export default userRouter;
