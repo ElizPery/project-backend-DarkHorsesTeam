@@ -1,8 +1,8 @@
 tags:
   - Auth
-summary: Logout a user
+summary: Logout user
 operationId: logoutUser
-description: "Logout a user"
+description: "Logout user"
 security:
   - bearerAuth: []
 parameters:

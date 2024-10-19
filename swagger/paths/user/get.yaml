@@ -1,8 +1,8 @@
 tags:
   - User
-summary: Get user information
+summary: Get user's information
 operationId: getUserData
-description: "Get user information"
+description: "Get user's information"
 security:
   - bearerAuth: []
 responses:
