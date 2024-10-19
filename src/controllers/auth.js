@@ -37,7 +37,7 @@ export const loginController = async (req, res) => {
   setupSession(res, session);
   res.json({
     status: 200,
-    message: 'Successfully refreshed a session!',
+    message: 'Successfully login a user!',
     data: {
       accessToken: session.accessToken,
     },

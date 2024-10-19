@@ -1,8 +1,8 @@
 tags:
   - Auth
-summary: Register user
-operationId: registerUser
-description: 'Register a user with payload'
+summary: Login user
+operationId: loginUser
+description: 'Login a user with payload'
 security:
   - bearerAuth: []
 requestBody:
@@ -11,14 +11,9 @@ requestBody:
       schema:
         type: object
         required:
-            - name
             - email
             - password
         properties:
-          name:
-            description: "User's name"
-            type: string
-            example: "John Doe"
           email:
             description: "User's email"
             type: string
@@ -28,8 +23,8 @@ requestBody:
             type: string
             example: "JohnDoe09483"
 responses:
-  '201':
-    description: "Successfully registered user"
+  '200':
+    description: "Successfully login a user!"
     content:
       application/json:
         schema:
@@ -41,15 +36,20 @@ responses:
           properties:
             status:
               type: integer
-              example: 201
+              example: 200
             message:
               type: string
-              example: "Successfully register a user"
+              example: "Successfully login a user!"
             data:
               type: object
-              $ref: ..\..\..\components\schemas\user.yaml
-  '409':
-    description: "Register a user failed"
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  type: string
+                  example: "HJeyebgvKdVUfC5Z"
+  '401':
+    description: "Login a user failed"
     content:
       application/json:
         schema:
@@ -60,7 +60,7 @@ responses:
           properties:
             status:
               type: integer
-              example: 409
+              example: 401
             message:
               type: string
-              example: "Email in use"
+              example: "Email or password invalid"
