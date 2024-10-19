@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import { UsersCollection } from './../db/models/User.js';
 export const getUserDataService = async (id) =>
   UsersCollection.findOne(id).select('-password');
@@ -23,5 +22,5 @@ export const updateUserAvatarService = async (userId, avatarUrl) => {
     userId,
     { photo: avatarUrl },
     { new: true },
-  );
+  ).select('-password');
 };

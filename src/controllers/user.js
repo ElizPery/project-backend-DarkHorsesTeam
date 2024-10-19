@@ -70,6 +70,7 @@ export const updateUserAvatarController = async (req, res, next) => {
 
   res.status(200).json({
     status: 200,
+    message: "Successfully updated user's photo!",
     data: updatedUser,
   });
 };
