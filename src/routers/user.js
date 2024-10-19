@@ -6,9 +6,9 @@ import {
   getUserDataController,
 } from '../controllers/user.js';
 import validateBody from './../utils/validateBody.js';
-import { userUpdateSchema, waterRateSchema } from '../validation/users.js';
+import { waterRateSchema, updatePhotoUserSchema } from '../validation/users.js';
 import { authenticate } from '../middlewares/authenticate.js';
-import isValidId from '../middlewares/isValidId.js';
+import upload from '../middlewares/upload.js';
 
 const userRouter = Router();
 userRouter.use(authenticate);
@@ -25,5 +25,10 @@ userRouter.patch(
   ctrlWrapper(changeUserController),
 );
 
-
+userRouter.patch(
+  '/change-photo',
+  upload.single('photo'),
+  validateBody(updatePhotoUserSchema),
+  ctrlWrapper(updateUserAvatarController),
+);
 export default userRouter;

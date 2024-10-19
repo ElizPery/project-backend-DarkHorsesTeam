@@ -58,4 +58,12 @@ export const changeUserService = async (userId, payload, options = {}) => {
     user: rawResult.value,
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
+}
+
+export const updateUserAvatarService = async (userId, avatarUrl) => {
+  return await UsersCollection.findByIdAndUpdate(
+    userId,
+    { photo: avatarUrl },
+    { new: true },
+  );
 };

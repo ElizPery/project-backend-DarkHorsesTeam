@@ -15,8 +15,11 @@ export const waterRateSchema = Joi.object({
   }),
 });
 export const userLoginSchema = Joi.object({
-    email: Joi.string().pattern(emailRegexp).required(),
-    password: Joi.string().min(8).max(64).required(),
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(8).max(64).required(),
+});
+export const updatePhotoUserSchema = Joi.object({
+  photo: Joi.string().required(),
 });
 
 export const userUpdateSchema = Joi.object({
