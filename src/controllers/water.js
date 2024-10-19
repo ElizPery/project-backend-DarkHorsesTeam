@@ -4,8 +4,6 @@ import {
   getWaterForMonth,
   deleteWater,
   getTodayWater,
-  addWater,
-  getWaterForMonth,
   updateWaterService,
 } from '../services/water.js';
 

@@ -4,6 +4,8 @@ import {
   getUserDataService,
   updateUserAvatarService,
 } from '../services/user.js';
+import { v2 as cloudinary } from 'cloudinary';
+import { env } from '../utils/env.js';
 import { saveFileToCloudinary } from '../utils/cloudinary.js';
 import { saveFileToUploadsDir } from '../utils/fileUpload.js';
 
