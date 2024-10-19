@@ -3,7 +3,6 @@ import * as authControllers from '../controllers/auth.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 import validateBody from '../utils/validateBody.js';
 import { userRegisterSchema, userLoginSchema } from '../validation/users.js';
-import { validateRefreshToken } from '../middlewares/authenticate.js';
 
 const authRouter = Router();
 
@@ -20,9 +19,5 @@ authRouter.post(
   validateBody(userLoginSchema),
   ctrlWrapper(authControllers.loginController),
 );
-authRouter.post(
-  '/refresh',
-  validateRefreshToken,
-  ctrlWrapper(authControllers.refreshController),
-);
+authRouter.post('/refresh', ctrlWrapper(authControllers.refreshController));
 export default authRouter;
