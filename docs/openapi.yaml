@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Water tracker
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 
+    This is a documentation of water tracker
+tags:
+  - name: Auth
+    description: Auth operations.
+  - name: User
+    description: Operations about user info.
+  - name: Water
+    description: Operations about water records.
+servers:
+  - url: http://localhost:3000
+paths:
+  /auth:
+    post: 
+      $ref: ../swagger/paths/auth/register/post.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
