@@ -38,25 +38,17 @@ export const changeWaterRateController = async (req, res, next) => {
 };
 
 export const changeUserController = async (req, res, next) => {
-  const { userId } = req.params;
-
-  let photoUrl;
-
-  if (req.file) {
-    photoUrl = await saveFileToUploadDir(req.file);
-  }
-
   const result = await changeUserService(
-    userId,
+    req.user._id,
+    // req.user.password,
     req.body,
-    photoUrl,
   );
 
   if (!result) {
     throw createHttpError(404, 'Sorry, but we don`t have such a user!');
   }
 
-  console.log(result);
+  console.log(req.body);
 
   return res.json({
     status: 200,

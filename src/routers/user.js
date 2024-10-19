@@ -20,8 +20,7 @@ userRouter.patch(
 );
 
 userRouter.patch(
-  '/update-info/:userId',
-  // upload.single('photo'),
+  '/update-info',
   validateBody(userUpdateSchema),
   ctrlWrapper(changeUserController),
 );

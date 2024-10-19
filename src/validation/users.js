@@ -22,6 +22,7 @@ export const userLoginSchema = Joi.object({
 export const userUpdateSchema = Joi.object({
   name: Joi.string().min(3).max(20),
   email: Joi.string(),
-  dailyNorma: Joi.number().min(0).max(10000),
+  currentPwd: Joi.string(),
+  password: Joi.string(),
   gender: Joi.string().valid('man', 'woman'),
 });
