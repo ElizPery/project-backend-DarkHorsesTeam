@@ -1,8 +1,7 @@
 import multer from 'multer';
 import path from 'node:path';
 
-const TEMP_UPLOAD_DIR = './temp';
-
+import { TEMP_UPLOAD_DIR } from '../constants/index.js';
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ['image/jpeg', 'image/png'];
 

@@ -43,6 +43,10 @@ export const updateUserAvatarController = async (req, res, next) => {
   const userId = req.user._id;
   let avatarUrl = req.user.photo;
 
+  if (req.body.photo) {
+    avatarUrl = req.body.photo;
+  }
+
   if (req.file) {
     if (avatarUrl) {
       const publicId = avatarUrl.split('/').pop().split('.')[0];
