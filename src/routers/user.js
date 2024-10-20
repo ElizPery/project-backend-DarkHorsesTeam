@@ -4,6 +4,7 @@ import {
   changeUserController,
   changeWaterRateController,
   getUserDataController,
+  updateUserAvatarController
 } from '../controllers/user.js';
 import validateBody from './../utils/validateBody.js';
 import { waterRateSchema, updatePhotoUserSchema } from '../validation/users.js';

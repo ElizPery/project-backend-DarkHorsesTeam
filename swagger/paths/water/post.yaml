@@ -1,0 +1,52 @@
+tags:
+  - Water
+summary: Post water record
+operationId: postWaterRecord
+description: "Post water record"
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - date
+          - volume
+          - dailyNorma
+        properties:
+          date:
+            description: "Date and time when water was consumed"
+            type: string
+            example: "2024-10-31T20:21"
+          volume:
+            description: "Amount of water in ml that was intake (max: 5000)"
+            type: number
+            example: 250
+          dailyNorma:
+            description: "User's daily norma in ml when record was created"
+            type: number
+            example: 1500
+responses:
+  '201':
+    description: "Successfully added water record"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: "Successfully added water!"
+            data:
+              type: object
+              $ref: '../../components/schemas/water.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'

@@ -1,0 +1,64 @@
+tags:
+  - User
+summary: Patch user's daily norma water intake
+operationId: patchUserWaterRate
+description: "Patch user's daily norma water intake"
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+            - dailyNorma
+        properties:
+          dailyNorma:
+            description: "User's daily norma water intake in ml (max: 15000)"
+            type: number
+            example: 1500
+responses:
+  '200':
+    description: "Successfully updated a water rate!"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "Successfully updated a water rate!"
+            data:
+              type: object
+              required:
+                - dailyNorma
+              properties:
+                dailyNorma:
+                  description: "User's daily norma water intake in ml (max: 15000)"
+                  type: number
+                  example: 1500
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    description: "Not found contact by id"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: "Contact with id 65ca67e7ae7f10c88b598384 not found"

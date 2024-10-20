@@ -1,0 +1,70 @@
+tags:
+  - Water
+summary: Patch water record
+operationId: patchWaterRecord
+description: "Patch water record"
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: "65ca67e7ae7f10c88b598384"
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - volume
+          - date
+        properties:
+          volume:
+            description: "Amount of water in ml that was intake (max: 5000)"
+            type: number
+            example: 250
+          date:
+            description: "Date and time when water was consumed"
+            type: string
+            example: "2024-10-31T20:21"
+responses:
+  '200':
+    description: "Patched a contact"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "Successfully update water record"
+            data:
+              type: object
+              $ref: '../../../components/schemas/water.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    description: "Water record not found"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: "Water record not found"

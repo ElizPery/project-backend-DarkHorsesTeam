@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 import { UsersCollection } from './../db/models/User.js';
+
 import createHttpError from 'http-errors';
 export const getUserDataService = async (id) =>
   UsersCollection.findOne(id).select('-password');
@@ -65,5 +64,5 @@ export const updateUserAvatarService = async (userId, avatarUrl) => {
     userId,
     { photo: avatarUrl },
     { new: true },
-  );
+  ).select('-password');
 };

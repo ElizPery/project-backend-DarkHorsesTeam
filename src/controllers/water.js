@@ -4,8 +4,6 @@ import {
   getWaterForMonth,
   deleteWater,
   getTodayWater,
-  addWater,
-  getWaterForMonth,
   updateWaterService,
 } from '../services/water.js';
 
@@ -60,7 +58,7 @@ export async function getWaterForMonthController(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully',
+    message: 'Successfully found records for this month',
     data,
   });
 }

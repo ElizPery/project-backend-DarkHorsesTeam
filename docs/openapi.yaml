@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Water tracker
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 
+    This is a documentation of water tracker
+tags:
+  - name: Auth
+    description: Auth operations.
+  - name: User
+    description: Operations about user info.
+  - name: Water
+    description: Operations about water records.
+servers:
+  - url: http://localhost:3000
+paths:
+  /auth/register:
+    post: 
+      $ref: ../swagger/paths/auth/register/post.yaml
+  /auth/login:
+    post: 
+      $ref: ../swagger/paths/auth/login/post.yaml
+  /auth/logout:
+    post: 
+      $ref: ../swagger/paths/auth/logout/post.yaml
+  /auth/refresh:
+    post: 
+      $ref: ../swagger/paths/auth/refresh/post.yaml
+  /user:
+    get: 
+      $ref: ../swagger/paths/user/get.yaml
+  /user/change-water-rate:
+    patch: 
+      $ref: ../swagger/paths/user/change-water-rate/patch.yaml
+  /user/update-info:
+    patch: 
+      $ref: ../swagger/paths/user/update-info/patch.yaml
+  /user/change-photo:
+    patch: 
+      $ref: ../swagger/paths/user/change-photo/patch.yaml
+  /water:
+    post: 
+      $ref: ../swagger/paths/water/post.yaml
+  /water/{id}:
+    patch: 
+      $ref: ../swagger/paths/water/{id}/patch.yaml
+    delete: 
+      $ref: ../swagger/paths/water/{id}/delete.yaml
+  /water/today:
+    get: 
+      $ref: ../swagger/paths/water/today/get.yaml  
+  /water/month:
+    post: 
+      $ref: ../swagger/paths/water/month/post.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
