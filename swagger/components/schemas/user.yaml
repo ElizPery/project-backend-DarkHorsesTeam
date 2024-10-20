@@ -31,9 +31,9 @@ properties:
     enum: ['man', 'woman']
     default: 'woman'
   photo:
-    description: "Link to user's avatar"
+    description: "Link to user's photo"
     type: string
-    format: binary
+    example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
   createdAt:
     description: "Time when user is created"
     type: string

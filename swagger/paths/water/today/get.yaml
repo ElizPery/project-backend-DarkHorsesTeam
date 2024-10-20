@@ -1,0 +1,40 @@
+tags:
+  - Water
+summary: Get user's water records for today
+operationId: getWaterRecordsToday
+description: "Get user's water records for today"
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: "Get user information"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "Successfully found today's water data"
+            data:
+              type: object
+              required:
+                - data
+                - totalWaterPercent
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '../../../components/schemas/water.yaml' 
+                totalWaterPercent:
+                  type: string
+                  example: "60%"
+  '401':
+    $ref: '../../../components/responses/401.yaml'

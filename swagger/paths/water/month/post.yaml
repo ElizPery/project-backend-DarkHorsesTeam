@@ -1,0 +1,81 @@
+tags:
+  - Water
+summary: Get water records for certain month
+operationId: getWaterRecordsMonth
+description: "Get water records for certain month"
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - month
+        properties:
+          month:
+            description: "Number of month to get water records for this period (min: 1, max: 12)"
+            type: number
+            example: 1
+responses:
+  '201':
+    description: "Successfully found records for this month"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "Successfully found records for this month"
+            data:
+              type: array
+              items: 
+                type: object
+                required:
+                  - date
+                  - dailyNorma
+                  - consumptionCount
+                  - percentage
+                properties:
+                  date:
+                    description: "Date when water was consumed"
+                    type: string
+                    example: "2024-10-31"
+                  dailyNorma:
+                    description: "User's daily norma in ml when record was created"
+                    type: number
+                    example: 1500
+                  consumptionCount:
+                    description: "Number of water records for this date"
+                    type: number
+                    example: 6
+                  percentage:
+                    description: "Percentage of water intake to user's daily norma"
+                    type: string
+                    example: '60%'
+  '400':
+    description: "Month is required"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: "Month is required"            
+  '401':
+    $ref: '../../../components/responses/401.yaml'

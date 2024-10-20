@@ -1,0 +1,38 @@
+type: object
+required:
+  - _id
+  - date
+  - dailyNorma
+  - volume
+  - userId
+  - createdAt
+  - updatedAt
+properties:
+  _id:
+    description: "Water record's id"
+    type: string
+    example: "65e4decdd286b30065d54af9"
+  date:
+    description: "Date and time when water was consumed"
+    type: string
+    example: "2024-10-31T20:21"
+  dailyNorma:
+    description: "User's daily norma when record was created"
+    type: number
+    example: 1500
+  volume:
+    description: "Amount of water in ml that was intake"
+    type: number
+    example: 250
+  userId:
+    description: "Id of the user who add this water record"
+    type: string
+    example: "65e4decdd286b30065d54af9"
+  createdAt:
+    description: "Time when water record is created"
+    type: string
+    example: 2024-09-20T11:05:13.014+00:00
+  updatedAt:
+    description: "Time when water record is updated"
+    type: string
+    example: 2024-09-20T11:05:13.014+00:00

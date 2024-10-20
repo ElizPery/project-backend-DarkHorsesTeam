@@ -1,25 +1,37 @@
 tags:
-  - User
-summary: Patch user's avatar/photo
-operationId: patchUserPhoto
-description: "Patch user's photo"
+  - Water
+summary: Patch water record
+operationId: patchWaterRecord
+description: "Patch water record"
 security:
   - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: "65ca67e7ae7f10c88b598384"
 requestBody:
   content:
-    multipart/form-data:
+    application/json:
       schema:
         type: object
         required:
-          - photo
+          - volume
+          - date
         properties:
-          photo:
-            description: "Link to user's photo"
+          volume:
+            description: "Amount of water in ml that was intake (max: 5000)"
+            type: number
+            example: 250
+          date:
+            description: "Date and time when water was consumed"
             type: string
-            format: binary
+            example: "2024-10-31T20:21"
 responses:
   '200':
-    description: "Successfully updated user's photo!"
+    description: "Patched a contact"
     content:
       application/json:
         schema:
@@ -34,14 +46,14 @@ responses:
               example: 200
             message:
               type: string
-              example: "Successfully updated user's photo!"
+              example: "Successfully update water record"
             data:
               type: object
-              $ref: '../../../components/schemas/user.yaml'
+              $ref: '../../../components/schemas/water.yaml'
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':
-    description: "Not found contact by id"
+    description: "Water record not found"
     content:
       application/json:
         schema:
@@ -55,4 +67,4 @@ responses:
               example: 404
             message:
               type: string
-              example: "Contact with id 65ca67e7ae7f10c88b598384 not found"
+              example: "Water record not found"
