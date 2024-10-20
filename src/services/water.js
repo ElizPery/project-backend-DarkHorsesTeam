@@ -16,7 +16,10 @@ export const getTodayWater = async ({ userId, dailyNorma }) => {
 
   const waterQuery = await WaterCollection.find({
     userId: userId,
-    date: { $gte: `${year}-${month}-${day}T00:00:00` },
+    date: {
+      $gte: `${year}-${month}-${day}T00:00:00`,
+      $lte: `${year}-${month}-${day}T23:59:00`,
+    },
   });
 
   if (waterQuery.length === 0) {
@@ -26,7 +29,8 @@ export const getTodayWater = async ({ userId, dailyNorma }) => {
     };
   }
 
-  let waterForDay;
+  let waterForDay = 0;
+  
   waterQuery.forEach((element) => {
     waterForDay += element.volume;
   });

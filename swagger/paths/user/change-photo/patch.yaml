@@ -14,7 +14,7 @@ requestBody:
           - photo
         properties:
           photo:
-            description: "Link to user's photo"
+            description: "File of user's photo (jpeg/png)"
             type: string
             format: binary
 responses:

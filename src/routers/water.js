@@ -26,7 +26,7 @@ waterRouter.patch(
   '/:id',
   isValidId,
   validateBody(updateWaterSchema),
-  ctrlWrapper(updateWaterController.updateWater),
+  ctrlWrapper(updateWaterController),
 );
 
 waterRouter.post(

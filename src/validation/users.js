@@ -22,7 +22,7 @@ export const userLoginSchema = Joi.object({
 });
 
 export const updatePhotoUserSchema = Joi.object({
-  photo: Joi.string().required(),
+  photo: Joi.string(),
 });
 
 export const userUpdateSchema = Joi.object({

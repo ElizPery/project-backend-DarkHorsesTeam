@@ -23,7 +23,7 @@ export const registerController = async (req, res) => {
 export const logoutController = async (req, res) => {
   const { sessionId } = req.cookies;
   if (sessionId) {
-    await authServices.logout(sessionId);
+    await authServices.logoutUser(sessionId);
   }
 
   res.clearCookie('sessionId');
