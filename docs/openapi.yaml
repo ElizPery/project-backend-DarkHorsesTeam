@@ -35,6 +35,9 @@ paths:
   /user/change-water-rate:
     patch: 
       $ref: ../swagger/paths/user/change-water-rate/patch.yaml
+  /user/update-info:
+    patch: 
+      $ref: ../swagger/paths/user/update-info/patch.yaml
   /user/change-photo:
     patch: 
       $ref: ../swagger/paths/user/change-photo/patch.yaml
