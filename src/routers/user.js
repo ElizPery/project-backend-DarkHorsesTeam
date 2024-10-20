@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import ctrlWrapper from './../utils/ctrlWrapper.js';
 import {
+  changeUserController,
   changeWaterRateController,
   getUserDataController,
   updateUserAvatarController
@@ -18,6 +19,13 @@ userRouter.patch(
   validateBody(waterRateSchema),
   ctrlWrapper(changeWaterRateController),
 );
+
+userRouter.patch(
+  '/update-info',
+  validateBody(userUpdateSchema),
+  ctrlWrapper(changeUserController),
+);
+
 userRouter.patch(
   '/change-photo',
   upload.single('photo'),
