@@ -21,3 +21,11 @@ export const userLoginSchema = Joi.object({
 export const updatePhotoUserSchema = Joi.object({
   photo: Joi.string().required(),
 });
+
+export const userUpdateSchema = Joi.object({
+  name: Joi.string().min(3).max(20),
+  email: Joi.string(),
+  currentPwd: Joi.string(),
+  password: Joi.string(),
+  gender: Joi.string().valid('man', 'woman'),
+});
