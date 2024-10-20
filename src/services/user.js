@@ -1,6 +1,8 @@
+import bcrypt from 'bcrypt';
 import { UsersCollection } from './../db/models/User.js';
 
 import createHttpError from 'http-errors';
+
 export const getUserDataService = async (id) =>
   UsersCollection.findOne(id).select('-password');
 
@@ -45,11 +47,10 @@ export const changeUserService = async (userId, payload, options = {}) => {
     { _id: userId },
     updateData,
     {
-      new: true,
       includeResultMetadata: true,
       ...options,
     },
-  );
+  ).select('-password');
 
   if (!rawResult || !rawResult.value) return null;
 
@@ -57,7 +58,7 @@ export const changeUserService = async (userId, payload, options = {}) => {
     user: rawResult.value,
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
-}
+};
 
 export const updateUserAvatarService = async (userId, avatarUrl) => {
   return await UsersCollection.findByIdAndUpdate(

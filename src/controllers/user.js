@@ -54,14 +54,12 @@ export const changeUserController = async (req, res, next) => {
     throw createHttpError(404, 'Sorry, but we don`t have such a user!');
   }
 
-  console.log(req.body);
-
   return res.json({
     status: 200,
     message: 'Successfully patched the user!',
     data: result.user,
-  })
-}
+  });
+};
 
 
 export const updateUserAvatarController = async (req, res, next) => {

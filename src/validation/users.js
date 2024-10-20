@@ -7,6 +7,7 @@ export const userRegisterSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(8).max(64).required(),
 });
+
 export const waterRateSchema = Joi.object({
   dailyNorma: Joi.number().min(0).max(15000).required().messages({
     'number.base': 'Water norm must be a number',
@@ -14,10 +15,12 @@ export const waterRateSchema = Joi.object({
     'number.max': 'Water norm must be less than or equal to 15000',
   }),
 });
+
 export const userLoginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(8).max(64).required(),
 });
+
 export const updatePhotoUserSchema = Joi.object({
   photo: Joi.string().required(),
 });
