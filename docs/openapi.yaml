@@ -15,7 +15,7 @@ tags:
   - name: Water
     description: Operations about water records.
 servers:
-  - url: http://localhost:3000
+  - url: https://project-backend-darkhorsesteam.onrender.com
 paths:
   /auth/register:
     post: 
