@@ -28,14 +28,15 @@ export const register = async (payload) => {
     throw createHttpError(409, 'Email already exist');
   }
   const hashPassword = await bcrypt.hash(password, 10);
+  const name = email.split('@')[0];
 
   const data = await UsersCollection.create({
     ...payload,
+    name,
     password: hashPassword,
   });
 
-  delete data._doc.password;
-  return data._doc;
+  return data._doc._id;
 };
 
 export const findSessionByAccessToken = async (accessToken) => {
