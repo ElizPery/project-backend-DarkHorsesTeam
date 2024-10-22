@@ -48,16 +48,10 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "name",
                   "email",
                   "password"
                 ],
                 "properties": {
-                  "name": {
-                    "description": "User's name",
-                    "type": "string",
-                    "example": "John Doe"
-                  },
                   "email": {
                     "description": "User's email",
                     "type": "string",
@@ -96,7 +90,15 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "required": [
+                        "_id"
+                      ],
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "2917348074el2p7"
+                        }
+                      }
                     }
                   }
                 }
@@ -1182,6 +1184,32 @@
         "scheme": "bearer"
       }
     },
+    "responses": {
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Authorization header is not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "schemas": {
       "user": {
         "type": "object",
@@ -1288,32 +1316,6 @@
             "description": "Time when water record is updated",
             "type": "string",
             "example": "2024-09-20T11:05:13.014+00:00"
-          }
-        }
-      }
-    },
-    "responses": {
-      "401": {
-        "description": "Unauthorized error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 401
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Authorization header is not found"
-                }
-              }
-            }
           }
         }
       }
